@@ -204,3 +204,13 @@ button {
   flex: 1 1 auto;
   padding: 1rem;
 }
+.invalid-tooltip {
+  background-color: rgba(220,53,69,.9);
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: .875rem;
+  margin-bottom: 1rem;
+  max-width: 100%;
+  padding: 0.25rem 0.5rem;
+  z-index: 5;
+}
