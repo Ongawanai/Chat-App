@@ -3,7 +3,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './App';
+import { useAuth } from './components/App';
+import { useDispatch } from 'react-redux';
+import { actions as channelsActions } from './slices/channelsSlice';
+import store from './slices/index.js';
 
 export const Build404 = () => (
   <div id='error-page'>
@@ -80,6 +83,19 @@ export const LoginPage = () => {
 };
 
 export const BuildPage = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  console.log('jeg');
+  const token = localStorage.getItem('token');
+  axios
+    .get('/api/v1/data', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      dispatch(channelsActions.setChannels(response.data));
+      console.log('heh');
+    });
+
   return <div>Good!</div>;
 };

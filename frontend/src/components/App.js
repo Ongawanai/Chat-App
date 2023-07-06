@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Build404, BuildPage, LoginPage } from './pages';
+import { Build404, BuildPage, LoginPage } from '../pages';
 import './App.css';
 //import AuthContext from './contexts/index.js';
 //import useAuth from './hooks/index.js';
