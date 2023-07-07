@@ -30,30 +30,28 @@ const LoginRoute = ({ children }) => {
 const App = () => (
   <AuthProvider>
     <BrowserRouter>
-      <div className='h-100 bg-light'>
-        <div className='d-flex flex-column h-100'>
-          <nav className='shadow-sm navbar navbar-expand-lg navbar-light bg-white'>
-            <div className='container'>
-              <a className='navbar-brand' href='/'>
-                Hexlet Chat
-              </a>
-            </div>
-          </nav>
-          <div className='container-fluid h-100'>
-            <div className='row justify-content-center align-content-center h-100'>
-              <Routes>
-                <Route path='*' element={<Build404 />} />
-                <Route
-                  path='/'
-                  element={
-                    <LoginRoute>
-                      <BuildPage />
-                    </LoginRoute>
-                  }
-                />
-                <Route path='login' element={<LoginPage />} />
-              </Routes>
-            </div>
+      <div className='d-flex flex-column h-100'>
+        <nav className='shadow-sm navbar navbar-expand-lg navbar-light bg-white'>
+          <div className='container'>
+            <a className='navbar-brand' href='/'>
+              Hexlet Chat
+            </a>
+          </div>
+        </nav>
+        <div className='container-fluid h-100'>
+          <div className='row justify-content-center align-content-center h-100'>
+            <Routes>
+              <Route path='*' element={<Build404 />} />
+              <Route
+                path='/'
+                element={
+                  <LoginRoute>
+                    <BuildPage />
+                  </LoginRoute>
+                }
+              />
+              <Route path='login' element={<LoginPage />} />
+            </Routes>
           </div>
         </div>
       </div>
