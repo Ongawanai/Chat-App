@@ -1,7 +1,10 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Build404, BuildPage, LoginPage } from '../pages';
+import { LoginPage } from '../pages/loginPage';
+import { BuildPage } from '../pages/chatPage';
+import { Build404 } from '../pages/errorPage';
 import './App.css';
+
 //import AuthContext from './contexts/index.js';
 //import useAuth from './hooks/index.js';
 
