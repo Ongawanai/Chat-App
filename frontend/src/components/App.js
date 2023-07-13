@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LoginPage } from '../pages/loginPage';
 import { BuildPage } from '../pages/chatPage';
 import { Build404 } from '../pages/errorPage';
-import './App.css';
+//import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //import AuthContext from './contexts/index.js';
 //import useAuth from './hooks/index.js';
