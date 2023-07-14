@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Modal } from 'react-bootstrap';
-import { socket } from '../socket.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { hideModal } from '../slices/modalsSlice.js';
+import SocketContext from '../contexts/socketContext.js';
 
-export const DeleteChannel = (props) => {
-  const { channelId, onHide } = props;
+export const DeleteChannelModal = () => {
+  const dispatch = useDispatch();
+  const onHide = () => dispatch(hideModal('deleteChannel'));
+  const channelId = useSelector((state) => state.modals.deleteChannel);
+
+  const { sendRemoveChannel } = useContext(SocketContext);
+
   const deleteAndClose = () => {
-    socket.emit('removeChannel', { id: channelId });
+    sendRemoveChannel({ id: channelId });
     onHide();
   };
   return (

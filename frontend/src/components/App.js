@@ -5,11 +5,8 @@ import { BuildPage } from '../pages/chatPage';
 import { Build404 } from '../pages/errorPage';
 //import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AuthContext from '../contexts/authContext';
 
-//import AuthContext from './contexts/index.js';
-//import useAuth from './hooks/index.js';
-
-const AuthContext = createContext({});
 export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
@@ -22,7 +19,7 @@ const AuthProvider = ({ children }) => {
     setLoggedIn(false);
   };
 
-  return <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ loggedIn, logIn, logOut, token }}>{children}</AuthContext.Provider>;
 };
 
 const LoginRoute = ({ children }) => {
