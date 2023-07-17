@@ -4,12 +4,12 @@ import { selectors as channelSelectors, setActiveChannel } from '../slices/chann
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import cn from 'classnames';
-import { deleteChannelModal } from '../slices/modalsSlice.js';
+import { deleteChannelModal, renameChannelModal } from '../slices/modalsSlice.js';
 
 export const Channels = () => {
   const dispatch = useDispatch();
   const channels = useSelector(channelSelectors.selectAll);
-  console.log(channels);
+
   const activeChannelId = useSelector((state) => state.channels.activeChannel);
   const activeChannel = channels.find((channel) => channel.id === activeChannelId);
 
@@ -27,6 +27,10 @@ export const Channels = () => {
 
   const deleteClick = (id) => () => {
     dispatch(deleteChannelModal(id));
+  };
+
+  const renameClick = (id) => () => {
+    dispatch(renameChannelModal(id));
   };
 
   const renderChannels = () => {
@@ -51,7 +55,7 @@ export const Channels = () => {
               />
               <Dropdown.Menu>
                 <Dropdown.Item onClick={deleteClick(currChanel.id)}>Удалить</Dropdown.Item>
-                <Dropdown.Item href='#/action-2'>Переименовать</Dropdown.Item>
+                <Dropdown.Item onClick={renameClick(currChanel.id)}>Переименовать</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </li>

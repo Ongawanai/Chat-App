@@ -1,20 +1,23 @@
-import React, { useContext } from 'react';
-import { Formik, Form, Field } from 'formik';
 import { Modal } from 'react-bootstrap';
-import * as Yup from 'yup';
+import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideModal } from '../slices/modalsSlice.js';
+import { useContext } from 'react';
+import { hideModal } from '../slices/modalsSlice';
 import { selectors as channelSelectors } from '../slices/channelsSlice.js';
-import SocketContext from '../contexts/socketContext.js';
+import * as Yup from 'yup';
+import SocketContext from '../contexts/socketContext';
 
-export const AddChannelModal = () => {
+export const RenameChannelModal = () => {
   const dispatch = useDispatch();
-  const onHide = () => dispatch(hideModal('addChannel'));
-  const channels = useSelector(channelSelectors.selectAll);
+  const onHide = () => dispatch(hideModal('renameChannel'));
 
+  const channels = useSelector(channelSelectors.selectAll);
   const channelsNames = channels.map(({ name }) => name);
 
-  const { sendNewChannel } = useContext(SocketContext);
+  const channelId = useSelector((state) => state.modals.renameChannel);
+  console.log(channelId);
+  const { sendRenameChannel } = useContext(SocketContext);
+
   const channelSchema = Yup.object().shape({
     channel: Yup.string().required('Обязательное поле').notOneOf(channelsNames, 'Такой канал уже существует'),
   });
@@ -22,7 +25,7 @@ export const AddChannelModal = () => {
   return (
     <Modal show onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Добавить канал</Modal.Title>
+        <Modal.Title>Переименовать канал</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -30,7 +33,8 @@ export const AddChannelModal = () => {
           initialValues={{ channel: '' }}
           validationSchema={channelSchema}
           onSubmit={(values) => {
-            sendNewChannel({ name: values.channel });
+            console.log(values.channel);
+            sendRenameChannel({ id: channelId, name: values.channel });
             onHide();
           }}
         >

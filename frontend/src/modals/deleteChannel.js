@@ -18,9 +18,10 @@ export const DeleteChannelModal = () => {
   return (
     <Modal show onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Remove</Modal.Title>
+        <Modal.Title>Удалить канал</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <p>Вы уверены?</p>
         <button onClick={deleteAndClose} className='btn btn-danger' type='submit' value='remove'>
           Удалить
         </button>

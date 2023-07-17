@@ -13,6 +13,7 @@ import { ChatHeader } from '../components/ChatHeader.jsx';
 import { MessageBox } from '../components/MessageBox.jsx';
 import { MessageForm } from '../components/MessageForm.jsx';
 import AuthContext from '../contexts/authContext.js';
+import { RenameChannelModal } from '../modals/renameChannel.js';
 
 export const BuildPage = () => {
   const dispatch = useDispatch();
@@ -33,36 +34,6 @@ export const BuildPage = () => {
       });
   }, []);
 
-  /* useEffect(() => {
-    const onDelete = (payload) => {
-      dispatch(channelsActions.deleteChannel(payload.id));
-      if (payload.id === channel.id) {
-        setChannel({
-          id: 1,
-          name: 'general',
-          removable: false,
-        });
-      }
-    };
-    const onAddMessage = (payload) => {
-      dispatch(messagesActions.addMessage(payload));
-    };
-    const onAddChannel = (payload) => {
-      dispatch(channelsActions.addChannel(payload));
-      setChannel(payload);
-    };
-
-    socket.on('newMessage', onAddMessage);
-    socket.on('newChannel', onAddChannel);
-    socket.on('removeChannel', onDelete);
-
-    return () => {
-      socket.off('newMessage', onAddMessage);
-      socket.off('newChannel', onAddChannel);
-      socket.off('removeChannel', onDelete);
-    };
-  }, [channel]);
-  */
   const messages = useSelector(messageSelectors.selectAll);
 
   const modals = useSelector((state) => state.modals);
@@ -89,6 +60,7 @@ export const BuildPage = () => {
       </div>
       {modals.addChannel ? <AddChannelModal /> : null}
       {modals.deleteChannel ? <DeleteChannelModal /> : null}
+      {modals.renameChannel ? <RenameChannelModal /> : null}
     </div>
   );
 };

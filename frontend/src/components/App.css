@@ -1,6 +1,10 @@
-.invalid-feedback {
-  color: #dc3545;
-  font-size: .875em;
-  margin-top: 0.25rem;
-  width: 100%;
+.message-error {
+    z-index: 5;
+    max-width: 100%;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.7rem;
+    font-size: .875rem;
+    color: #fff;
+    background-color: var(--bs-danger);
+    border-radius: var(--bs-border-radius);
 }

@@ -20,8 +20,11 @@ const modalsSlice = createSlice({
     deleteChannelModal: (state, { payload }) => {
       state.deleteChannel = payload;
     },
+    renameChannelModal: (state, { payload }) => {
+      state.renameChannel = payload;
+    },
   },
 });
 
-export const { showModal, hideModal, deleteChannelModal } = modalsSlice.actions;
+export const { showModal, hideModal, deleteChannelModal, renameChannelModal } = modalsSlice.actions;
 export default modalsSlice.reducer;

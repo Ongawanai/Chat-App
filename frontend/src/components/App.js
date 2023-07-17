@@ -3,9 +3,11 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LoginPage } from '../pages/loginPage';
 import { BuildPage } from '../pages/chatPage';
 import { Build404 } from '../pages/errorPage';
-//import './App.css';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthContext from '../contexts/authContext';
+import { RegistrationPage } from '../pages/registrationPage';
+import { LogOutButton } from './logOutButton';
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -25,7 +27,7 @@ const AuthProvider = ({ children }) => {
 const LoginRoute = ({ children }) => {
   const auth = useAuth();
 
-  return auth.loggedIn ? children : <Navigate to='/login' />;
+  return auth.loggedIn ? children : <LoginPage />;
 };
 
 const App = () => (
@@ -37,6 +39,7 @@ const App = () => (
             <a className='navbar-brand' href='/'>
               Hexlet Chat
             </a>
+            <LogOutButton />
           </div>
         </nav>
         <div className='container-fluid h-100'>
@@ -51,7 +54,15 @@ const App = () => (
                   </LoginRoute>
                 }
               />
-              <Route path='login' element={<LoginPage />} />
+              <Route
+                path='login'
+                element={
+                  <LoginRoute>
+                    <BuildPage />
+                  </LoginRoute>
+                }
+              />
+              <Route path='signup' element={<RegistrationPage />} />
             </Routes>
           </div>
         </div>
