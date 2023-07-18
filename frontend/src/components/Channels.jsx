@@ -12,19 +12,11 @@ export const Channels = () => {
   const channels = useSelector(channelSelectors.selectAll);
 
   const activeChannelId = useSelector((state) => state.channels.activeChannel);
-  const activeChannel = channels.find((channel) => channel.id === activeChannelId);
 
-  const channelClass = (channelName) =>
+  const channelClass = (channelId) =>
     cn('w-100', 'text-start', 'btn', 'text-truncate', {
-      'btn-secondary': activeChannel.name === channelName,
+      'btn-secondary': activeChannelId === channelId,
     });
-
-  const changeChannel = (e) => {
-    e.preventDefault();
-    const targetChannelName = e.target.value;
-    const targetChannel = channels.find(({ name }) => name === targetChannelName);
-    dispatch(setActiveChannel(targetChannel.id));
-  };
 
   const deleteClick = (id) => () => {
     dispatch(deleteChannelModal(id));
@@ -41,16 +33,16 @@ export const Channels = () => {
           <li key={currChanel.id} className='nav-item w-100'>
             <Dropdown as={ButtonGroup} className='d-flex dropdown btn-group'>
               <button
-                onClick={changeChannel}
+                onClick={() => dispatch(setActiveChannel(currChanel.id))}
                 value={currChanel.name}
                 type='button'
-                className={channelClass(currChanel.name)}
+                className={channelClass(currChanel.id)}
               >
                 <span className='me-1 non-clickable'># </span>
                 {currChanel.name}
               </button>
               <Dropdown.Toggle
-                className={`btn ${currChanel.name === activeChannel.name ? ' btn-secondary' : ''}`}
+                className={`btn ${currChanel.id === activeChannelId ? ' btn-secondary' : ''}`}
                 variant='none'
                 id='dropdown-split-basic'
               />
@@ -64,7 +56,12 @@ export const Channels = () => {
       }
       return (
         <li key={currChanel.id} className='nav-item w-100'>
-          <button onClick={changeChannel} value={currChanel.name} type='button' className={channelClass(currChanel.name)}>
+          <button
+            onClick={() => dispatch(setActiveChannel(currChanel.id))}
+            value={currChanel.name}
+            type='button'
+            className={channelClass(currChanel.id)}
+          >
             <span className='me-1 non-clickable'># </span>
             {currChanel.name}
           </button>

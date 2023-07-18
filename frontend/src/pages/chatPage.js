@@ -28,7 +28,6 @@ export const BuildPage = () => {
         },
       })
       .then((response) => {
-        console.log(response.data.currentChannelId);
         dispatch(setChannels(response.data.channels));
         dispatch(setActiveChannel(response.data.currentChannelId));
         dispatch(setMessages(response.data.messages));

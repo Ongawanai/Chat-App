@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideModal } from '../slices/modalsSlice.js';
-import { selectors as channelSelectors } from '../slices/channelsSlice.js';
+import { selectors as channelSelectors, setActiveChannel } from '../slices/channelsSlice.js';
 import SocketContext from '../contexts/socketContext.js';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
@@ -15,13 +15,13 @@ export const AddChannelModal = () => {
   const onHide = () => dispatch(hideModal('addChannel'));
   const channels = useSelector(channelSelectors.selectAll);
   const nameField = useRef(null);
+  const { api } = useContext(SocketContext);
   useEffect(() => {
     nameField.current.focus();
   }, []);
 
   const channelsNames = channels.map(({ name }) => name);
 
-  const { sendNewChannel } = useContext(SocketContext);
   const channelSchema = Yup.object().shape({
     channel: Yup.string().required(t('req')).notOneOf(channelsNames, t('channelExist')),
   });
@@ -36,10 +36,16 @@ export const AddChannelModal = () => {
         <Formik
           initialValues={{ channel: '' }}
           validationSchema={channelSchema}
-          onSubmit={(values) => {
-            sendNewChannel({ name: values.channel });
-            onHide();
-            toast.success(t('channelCreated'));
+          onSubmit={async (values) => {
+            try {
+              const response = await api.sendChannel({ name: values.channel });
+              console.log(response);
+              dispatch(setActiveChannel(response.id));
+              onHide();
+              toast.success(t('channelCreated'));
+            } catch {
+              toast.error(t('channelCreated'));
+            }
           }}
         >
           {({ errors, isSubmitting }) => (
