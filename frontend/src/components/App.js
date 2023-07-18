@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthContext from '../contexts/authContext';
 import { RegistrationPage } from '../pages/registrationPage';
 import { LogOutButton } from './logOutButton';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -42,30 +44,27 @@ const App = () => (
             <LogOutButton />
           </div>
         </nav>
-        <div className='container-fluid h-100'>
-          <div className='row justify-content-center align-content-center h-100'>
-            <Routes>
-              <Route path='*' element={<Build404 />} />
-              <Route
-                path='/'
-                element={
-                  <LoginRoute>
-                    <BuildPage />
-                  </LoginRoute>
-                }
-              />
-              <Route
-                path='login'
-                element={
-                  <LoginRoute>
-                    <BuildPage />
-                  </LoginRoute>
-                }
-              />
-              <Route path='signup' element={<RegistrationPage />} />
-            </Routes>
-          </div>
-        </div>
+        <Routes>
+          <Route path='*' element={<Build404 />} />
+          <Route
+            path='/'
+            element={
+              <LoginRoute>
+                <BuildPage />
+              </LoginRoute>
+            }
+          />
+          <Route
+            path='login'
+            element={
+              <LoginRoute>
+                <BuildPage />
+              </LoginRoute>
+            }
+          />
+          <Route path='signup' element={<RegistrationPage />} />
+        </Routes>
+        <ToastContainer />
       </div>
     </BrowserRouter>
   </AuthProvider>

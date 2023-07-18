@@ -36,7 +36,6 @@ const init = async () => {
   };
 
   const sendNewMessage = (data) => {
-    console.log(data);
     Socket.emit('newMessage', data);
   };
   const sendNewChannel = (data) => {

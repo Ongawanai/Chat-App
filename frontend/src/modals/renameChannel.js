@@ -1,21 +1,28 @@
 import { Modal } from 'react-bootstrap';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { hideModal } from '../slices/modalsSlice';
 import { selectors as channelSelectors } from '../slices/channelsSlice.js';
 import * as Yup from 'yup';
 import SocketContext from '../contexts/socketContext';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 export const RenameChannelModal = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const onHide = () => dispatch(hideModal('renameChannel'));
 
   const channels = useSelector(channelSelectors.selectAll);
   const channelsNames = channels.map(({ name }) => name);
 
+  const nameField = useRef(null);
+  useEffect(() => {
+    nameField.current.focus();
+  }, []);
+
   const channelId = useSelector((state) => state.modals.renameChannel);
-  console.log(channelId);
   const { sendRenameChannel } = useContext(SocketContext);
 
   const channelSchema = Yup.object().shape({
@@ -25,7 +32,7 @@ export const RenameChannelModal = () => {
   return (
     <Modal show onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Переименовать канал</Modal.Title>
+        <Modal.Title>{t('rename')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -36,6 +43,7 @@ export const RenameChannelModal = () => {
             console.log(values.channel);
             sendRenameChannel({ id: channelId, name: values.channel });
             onHide();
+            toast.success(t('channelRenamed'));
           }}
         >
           {({ errors, isSubmitting }) => (
@@ -46,20 +54,20 @@ export const RenameChannelModal = () => {
                   id='channel'
                   type='channel'
                   name='channel'
-                  placeholder='Название канала'
-                  autoFocus
+                  placeholder={t('channelName')}
+                  innerRef={nameField}
                 />
                 {errors.channel ? <div className='message-error'>{errors.channel}</div> : null}
                 <label className='visually-hidden' htmlFor='channel'>
-                  Название канала
+                  {t('channelName')}
                 </label>
               </div>
               <div className='d-flex justify-content-end'>
                 <button type='button' className='me-2 btn btn-secondary' onClick={onHide}>
-                  Отменить
+                  {t('cancel')}
                 </button>
                 <button type='submit' className='btn btn-primary' disabled={isSubmitting}>
-                  Отправить
+                  {t('send')}
                 </button>
               </div>
             </Form>

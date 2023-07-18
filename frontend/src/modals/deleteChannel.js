@@ -3,9 +3,12 @@ import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideModal } from '../slices/modalsSlice.js';
 import SocketContext from '../contexts/socketContext.js';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 export const DeleteChannelModal = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const onHide = () => dispatch(hideModal('deleteChannel'));
   const channelId = useSelector((state) => state.modals.deleteChannel);
 
@@ -14,17 +17,23 @@ export const DeleteChannelModal = () => {
   const deleteAndClose = () => {
     sendRemoveChannel({ id: channelId });
     onHide();
+    toast.success(t('channelDeleted'));
   };
   return (
     <Modal show onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Удалить канал</Modal.Title>
+        <Modal.Title>{t('deleteChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Вы уверены?</p>
-        <button onClick={deleteAndClose} className='btn btn-danger' type='submit' value='remove'>
-          Удалить
-        </button>
+        <p>{t('youSure')}</p>
+        <div className='d-flex justify-content-end'>
+          <button onClick={onHide} className='btn btn-secondary me-2' type='submit' value='remove'>
+            {t('cancel')}
+          </button>
+          <button onClick={deleteAndClose} className='btn btn-danger' type='submit' value='remove'>
+            {t('delete')}
+          </button>
+        </div>
       </Modal.Body>
     </Modal>
   );

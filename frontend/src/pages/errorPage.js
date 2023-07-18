@@ -1,9 +1,14 @@
-export const Build404 = () => (
-  <div id='error-page'>
-    <h1>Oops!</h1>
-    <p>Sorry, an unexpected error has occurred.</p>
-    <p>
-      <i>Not Found</i>
-    </p>
-  </div>
-);
+import { useTranslation } from 'react-i18next';
+
+export const Build404 = () => {
+  const { t } = useTranslation();
+  return (
+    <div id='error-page'>
+      <h1>{t('oops')}</h1>
+      <p>{t('sorryError')}</p>
+      <p>
+        <i>{t('notFound')}</i>
+      </p>
+    </div>
+  );
+};
