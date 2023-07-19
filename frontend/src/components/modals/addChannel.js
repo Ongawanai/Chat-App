@@ -51,25 +51,25 @@ export const AddChannelModal = () => {
         >
           {({ errors, isSubmitting }) => (
             <Form>
-              <div className='form-floating mb-3'>
+              <div className="form-floating mb-3">
                 <Field
-                  className='mb-2 form-control'
-                  id='channel'
-                  type='channel'
-                  name='channel'
+                  className="mb-2 form-control"
+                  id="channel"
+                  type="channel"
+                  name="channel"
                   placeholder={t('channelName')}
                   innerRef={nameField}
                 />
-                {errors.channel ? <div className='message-error'>{errors.channel}</div> : null}
-                <label className='visually-hidden' htmlFor='channel'>
+                {errors.channel ? <div className="message-error">{errors.channel}</div> : null}
+                <label className="visually-hidden" htmlFor="channel">
                   {t('channelName')}
                 </label>
               </div>
-              <div className='d-flex justify-content-end'>
-                <button type='button' className='me-2 btn btn-secondary' onClick={onHide}>
+              <div className="d-flex justify-content-end">
+                <button type="button" className="me-2 btn btn-secondary" onClick={onHide}>
                   {t('cancel')}
                 </button>
-                <button type='submit' className='btn btn-primary' disabled={isSubmitting}>
+                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
                   {t('send')}
                 </button>
               </div>

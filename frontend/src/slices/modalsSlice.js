@@ -26,5 +26,7 @@ const modalsSlice = createSlice({
   },
 });
 
-export const { showModal, hideModal, deleteChannelModal, renameChannelModal } = modalsSlice.actions;
+export const {
+  showModal, hideModal, deleteChannelModal, renameChannelModal,
+} = modalsSlice.actions;
 export default modalsSlice.reducer;

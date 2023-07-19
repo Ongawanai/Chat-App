@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { AddChannelModal } from '../components/modals/addChannel.js';
 import { DeleteChannelModal } from '../components/modals/deleteChannel';
 import { setActiveChannel, setChannels } from '../slices/channelsSlice.js';
@@ -12,8 +14,6 @@ import { MessageBox } from '../components/MessageBox.jsx';
 import { MessageForm } from '../components/MessageForm.jsx';
 import AuthContext from '../contexts/authContext.js';
 import { RenameChannelModal } from '../components/modals/renameChannel.js';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 
 export const BuildPage = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export const BuildPage = () => {
         dispatch(setActiveChannel(response.data.currentChannelId));
         dispatch(setMessages(response.data.messages));
       })
-      .catch(function (error) {
+      .catch((error) => {
         toast.error(t('dataError'));
       });
   }, []);
@@ -40,17 +40,17 @@ export const BuildPage = () => {
   const modals = useSelector((state) => state.modals);
 
   return (
-    <div className='container h-100 my-4 overflow-hidden rounded shadow'>
-      <div className='row h-100 bg-white flex-md-row'>
-        <div className='col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex'>
-          <div className='d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4'>
+    <div className="container h-100 my-4 overflow-hidden rounded shadow">
+      <div className="row h-100 bg-white flex-md-row">
+        <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
+          <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
             <b>{t('channels')}</b>
             <AddChannelButton />
           </div>
           <Channels />
         </div>
-        <div className='col p-0 h-100'>
-          <div className='d-flex flex-column h-100'>
+        <div className="col p-0 h-100">
+          <div className="d-flex flex-column h-100">
             <ChatHeader />
             <MessageBox />
             <MessageForm />

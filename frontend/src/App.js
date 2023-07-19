@@ -1,25 +1,25 @@
-import React, { useState, useContext } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import React, { useState, useContext } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { LoginPage } from './pages/loginPage';
-import { BuildPage } from "./pages/chatPage";
-import { Build404 } from "./pages/errorPage";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import AuthContext from "./contexts/authContext";
-import { RegistrationPage } from "./pages/registrationPage";
-import { LogOutButton } from "./components/logOutButton";
-import "react-toastify/dist/ReactToastify.css";
+import { BuildPage } from './pages/chatPage';
+import { Build404 } from './pages/errorPage';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AuthContext from './contexts/authContext';
+import { RegistrationPage } from './pages/registrationPage';
+import { LogOutButton } from './components/logOutButton';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   const [loggedIn, setLoggedIn] = useState(!!token);
   const logIn = () => setLoggedIn(true);
   const logOut = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     setLoggedIn(false);
   };
 
@@ -46,34 +46,34 @@ const LoginRoute = ({ children }) => {
 const App = () => (
   <AuthProvider>
     <BrowserRouter>
-      <div className='d-flex flex-column h-100'>
-        <nav className='shadow-sm navbar navbar-expand-lg navbar-light bg-white'>
-          <div className='container'>
-            <a className='navbar-brand' href='/'>
+      <div className="d-flex flex-column h-100">
+        <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+          <div className="container">
+            <a className="navbar-brand" href="/">
               Hexlet Chat
             </a>
             <LogOutButton />
           </div>
         </nav>
         <Routes>
-          <Route path='*' element={<Build404 />} />
+          <Route path="*" element={<Build404 />} />
           <Route
-            path='/'
-            element={
+            path="/"
+            element={(
               <LoginRoute>
                 <BuildPage />
               </LoginRoute>
-            }
+            )}
           />
           <Route
-            path='login'
-            element={
+            path="login"
+            element={(
               <LoginRoute>
                 <BuildPage />
               </LoginRoute>
-            }
+            )}
           />
-          <Route path='signup' element={<RegistrationPage />} />
+          <Route path="signup" element={<RegistrationPage />} />
         </Routes>
         <ToastContainer />
       </div>

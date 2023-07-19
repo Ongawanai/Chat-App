@@ -1,10 +1,12 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import {
+  ErrorMessage, Field, Form, Formik,
+} from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useAuth } from '../App';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../hooks/index.js';
 
 export const RegistrationPage = () => {
   const { t } = useTranslation();
@@ -20,11 +22,11 @@ export const RegistrationPage = () => {
     username: Yup.string().min(3, t('min3max20')).max(20, t('min3max20')).required(t('req')),
   });
   return (
-    <div className='container-fluid h-100'>
-      <div className='row justify-content-center align-content-center h-100'>
-        <div className='col-12 col-md-8 col-xxl-6'>
-          <div className='card shadow-sm'>
-            <div className='card-body d-flex flex-column flex-md-row justify-content-around align-items-center row p-5'>
+    <div className="container-fluid h-100">
+      <div className="row justify-content-center align-content-center h-100">
+        <div className="col-12 col-md-8 col-xxl-6">
+          <div className="card shadow-sm">
+            <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center row p-5">
               <Formik
                 initialValues={{ username: '', password: '', confirmPassword: '' }}
                 validationSchema={SignupSchema}
@@ -47,38 +49,38 @@ export const RegistrationPage = () => {
                 }}
               >
                 {({ isSubmitting }) => (
-                  <Form className='col-12 col-md-6 mt-3 mt-mb-0'>
-                    <h1 className='text-center mb-4'>{t('login')}</h1>
-                    <div className='form-floating mb-3'>
-                      <Field className='form-control' type='username' id='username' name='username' placeholder='Ваш Ник' />
-                      <label className='form-label' htmlFor='username'>
+                  <Form className="col-12 col-md-6 mt-3 mt-mb-0">
+                    <h1 className="text-center mb-4">{t('login')}</h1>
+                    <div className="form-floating mb-3">
+                      <Field className="form-control" type="username" id="username" name="username" placeholder="Ваш Ник" />
+                      <label className="form-label" htmlFor="username">
                         {t('username')}
                       </label>
-                      <ErrorMessage className='message-error' name='username' component='div' />
+                      <ErrorMessage className="message-error" name="username" component="div" />
                     </div>
-                    <div className='form-floating mb-3'>
-                      <Field className='form-control' type='password' id='password' name='password' placeholder='Пароль' />
-                      <label className='form-label' htmlFor='password'>
+                    <div className="form-floating mb-3">
+                      <Field className="form-control" type="password" id="password" name="password" placeholder="Пароль" />
+                      <label className="form-label" htmlFor="password">
                         {t('password')}
                       </label>
-                      <ErrorMessage className='message-error' name='password' component='div' />
+                      <ErrorMessage className="message-error" name="password" component="div" />
                     </div>
-                    <div className='form-floating mb-3'>
+                    <div className="form-floating mb-3">
                       <Field
-                        className='form-control'
-                        type='password'
-                        name='confirmPassword'
-                        placeholder='Подтвердите пароль'
-                        id='confirmPassword'
+                        className="form-control"
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Подтвердите пароль"
+                        id="confirmPassword"
                       />
-                      <label className='form-label' htmlFor='confirmPassword'>
+                      <label className="form-label" htmlFor="confirmPassword">
                         {t('confirmPassword')}
                       </label>
-                      <ErrorMessage className='message-error' name='confirmPassword' component='div' />
+                      <ErrorMessage className="message-error" name="confirmPassword" component="div" />
                     </div>
-                    <div className='form-floating mb-3'>
-                      {errorMessage ? <div className='message-error'>{errorMessage}</div> : null}
-                      <button className='w-100 mb-3 btn btn-outline-primary' type='submit' disabled={isSubmitting}>
+                    <div className="form-floating mb-3">
+                      {errorMessage ? <div className="message-error">{errorMessage}</div> : null}
+                      <button className="w-100 mb-3 btn btn-outline-primary" type="submit" disabled={isSubmitting}>
                         {t('confirmRegistration')}
                       </button>
                     </div>
