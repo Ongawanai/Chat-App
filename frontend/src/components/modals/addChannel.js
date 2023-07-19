@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { Formik, Form, Field } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-bootstrap';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
+import filter from 'leo-profanity';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideModal } from '../../slices/modalsSlice.js';
 import { selectors as channelSelectors, setActiveChannel } from '../../slices/channelsSlice.js';
 import SocketContext from '../../contexts/socketContext.js';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
-import filter from 'leo-profanity';
 
 export const AddChannelModal = () => {
   const { t } = useTranslation();
