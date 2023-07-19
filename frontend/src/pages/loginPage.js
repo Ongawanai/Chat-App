@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/App';
+import { useAuth } from '../App';
 import { useTranslation } from 'react-i18next';
 
 export const LoginPage = () => {

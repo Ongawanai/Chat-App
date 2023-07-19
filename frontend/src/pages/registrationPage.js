@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useAuth } from '../components/App';
+import { useAuth } from '../App';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 

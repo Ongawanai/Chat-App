@@ -1,13 +1,13 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { LoginPage } from '../pages/loginPage';
-import { BuildPage } from '../pages/chatPage';
-import { Build404 } from '../pages/errorPage';
+import { LoginPage } from './pages/loginPage';
+import { BuildPage } from './pages/chatPage';
+import { Build404 } from './pages/errorPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AuthContext from '../contexts/authContext';
-import { RegistrationPage } from '../pages/registrationPage';
-import { LogOutButton } from './logOutButton';
+import AuthContext from './contexts/authContext';
+import { RegistrationPage } from './pages/registrationPage';
+import { LogOutButton } from './components/logOutButton';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
