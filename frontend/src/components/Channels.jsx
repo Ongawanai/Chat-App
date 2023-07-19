@@ -45,7 +45,9 @@ export const Channels = () => {
                 className={`btn ${currChanel.id === activeChannelId ? ' btn-secondary' : ''}`}
                 variant='none'
                 id='dropdown-split-basic'
-              />
+              >
+                <span class='visually-hidden'>{t('channelManagment')}</span>
+              </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item onClick={deleteClick(currChanel.id)}>{t('delete')}</Dropdown.Item>
                 <Dropdown.Item onClick={renameClick(currChanel.id)}>{t('renameButton')}</Dropdown.Item>

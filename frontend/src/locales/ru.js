@@ -41,5 +41,6 @@ export default {
     channelRenamed: 'Канал переименован',
     dataError: 'Ошибка соединения',
     confirmRegistration: 'Зарегистрироваться',
+    channelManagment: 'Управление каналом',
   },
 };
