@@ -28,7 +28,7 @@ export default {
     cancel: 'Отменить',
     rename: 'Переименовать канал',
     renameButton: 'Переименовать',
-    channelName: 'Название канала',
+    channelName: 'Имя канала',
     send: 'Отправить',
     addChannel: 'Добавить канал',
     writeMessage: 'Введите сообщение...',
