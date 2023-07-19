@@ -4,7 +4,8 @@
   "description": "Slack-like chat app",
   "main": "index.js",
   "scripts": {
-    "start": "make start"
+    "build": "npm run build --prefix frontend",
+    "start": "start-server -s ./frontend/build"
   },
   "repository": {
     "type": "git",
