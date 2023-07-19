@@ -23,7 +23,7 @@ const init = async () => {
   filter.loadDictionary(i18n.language);
 
   const rollbarConfig = {
-    accessToken: localStorage.getItem('token'),
+    accessToken: process.env.REACT_APP_ROLLBAR_TOKEN,
     environment: 'testenv',
   };
 
@@ -69,6 +69,10 @@ const init = async () => {
   Socket.on('newChannel', addNewChannel);
   Socket.on('removeChannel', removeChannel);
   Socket.on('renameChannel', changeChannelName);
+  function TestError() {
+    const a = null;
+    return a.hello();
+  }
 
   return (
     <RollbarProvider config={rollbarConfig}>
