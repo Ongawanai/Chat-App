@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Slack-like chat app",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "build": "npm run build --prefix frontend",
     "start": "start-server -s ./frontend/build",
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Ongawanai/frontend-project-12#readme",
   "dependencies": {
-    "@hexlet/chat-server": "^1.1.3",
+    "@hexlet/chat-server": "^1.1.6",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
