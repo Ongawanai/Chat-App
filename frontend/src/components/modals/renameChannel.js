@@ -25,6 +25,7 @@ export const RenameChannelModal = () => {
 
   const channelId = useSelector((state) => state.modals.renameChannel);
   const { sendRenameChannel } = useContext(SocketContext);
+  const currentChannel = channels.find((channel) => channel.id === channelId);
 
   const channelSchema = Yup.object().shape({
     channel: Yup.string().required('Обязательное поле').notOneOf(channelsNames, 'Такой канал уже существует'),
@@ -38,7 +39,7 @@ export const RenameChannelModal = () => {
 
       <Modal.Body>
         <Formik
-          initialValues={{ channel: '' }}
+          initialValues={{ channel: currentChannel.name }}
           validationSchema={channelSchema}
           onSubmit={(values) => {
             sendRenameChannel({ id: channelId, name: filter.clean(values.channel) });

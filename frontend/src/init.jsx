@@ -69,10 +69,6 @@ const init = async () => {
   Socket.on('newChannel', addNewChannel);
   Socket.on('removeChannel', removeChannel);
   Socket.on('renameChannel', changeChannelName);
-  function TestError() {
-    const a = null;
-    return a.hello();
-  }
 
   return (
     <RollbarProvider config={rollbarConfig}>
