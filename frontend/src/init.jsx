@@ -23,7 +23,7 @@ const init = async () => {
   filter.loadDictionary(i18n.language);
 
   const rollbarConfig = {
-    accessToken: process.env.REACT_APP_ROLLBAR_TOKEN,
+    accessToken: '6a4f0b93d51648eda09e8d6633db082f',
     environment: 'testenv',
   };
 
