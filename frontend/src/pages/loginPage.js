@@ -43,14 +43,14 @@ export const LoginPage = () => {
                 {({ isSubmitting }) => (
                   <Form className='col-12 col-md-6 mt-3 mt-mb-0'>
                     <div className='form-floating mb-3'>
-                      <Field className='form-control' type='username' name='username' placeholder='Ваш Ник' />
+                      <Field className='form-control' type='username' id='username' name='username' placeholder='Ваш Ник' />
                       <label className='form-label' for='username'>
                         {t('nickname')}
                       </label>
                       <ErrorMessage className='message-error' name='username' component='div' />
                     </div>
                     <div className='form-floating mb-3'>
-                      <Field className='form-control' type='password' name='password' placeholder='Пароль' />
+                      <Field className='form-control' type='password' id='password' name='password' placeholder='Пароль' />
                       <label className='form-label' for='password'>
                         {t('password')}
                       </label>
