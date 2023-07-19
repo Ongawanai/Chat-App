@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddChannelModal } from '../modals/addChannel.js';
-import { DeleteChannelModal } from '../modals/deleteChannel';
+import { AddChannelModal } from '../components/modals/addChannel.js';
+import { DeleteChannelModal } from '../components/modals/deleteChannel';
 import { setActiveChannel, setChannels } from '../slices/channelsSlice.js';
 import { setMessages } from '../slices/messagesSlice.js';
 import { AddChannelButton } from '../components/AddChannelButton';
@@ -11,7 +11,7 @@ import { ChatHeader } from '../components/ChatHeader.jsx';
 import { MessageBox } from '../components/MessageBox.jsx';
 import { MessageForm } from '../components/MessageForm.jsx';
 import AuthContext from '../contexts/authContext.js';
-import { RenameChannelModal } from '../modals/renameChannel.js';
+import { RenameChannelModal } from '../components/modals/renameChannel.js';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 

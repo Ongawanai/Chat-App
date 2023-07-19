@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideModal } from '../slices/modalsSlice.js';
-import SocketContext from '../contexts/socketContext.js';
+import { hideModal } from '../../slices/modalsSlice.js';
+import SocketContext from '../../contexts/socketContext.js';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 

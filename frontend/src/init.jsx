@@ -5,9 +5,11 @@ import resources from './locales/index.js';
 import { Provider } from 'react-redux';
 import store from './slices/index.js';
 import { io } from 'socket.io-client';
-import { addChannel, setChangingChannel, deleteChannel, renameChannel } from './slices/channelsSlice.js';
+import { addChannel, deleteChannel, renameChannel } from './slices/channelsSlice.js';
 import { addMessage } from './slices/messagesSlice.js';
 import SocketContext from './contexts/socketContext.js';
+import filter from 'leo-profanity';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 
 const init = async () => {
   const Socket = io();
@@ -18,15 +20,11 @@ const init = async () => {
     fallbackLng: 'ru',
   });
 
-  const sendNewChannel = (...args) =>
-    new Promise((resolve, reject) => {
-      Socket.emit(...args, (response) => {
-        resolve(response.data);
-      });
-    });
+  filter.loadDictionary(i18n.language);
 
-  const api = {
-    sendChannel: (channel) => sendNewChannel('newChannel', channel),
+  const rollbarConfig = {
+    accessToken: localStorage.getItem('token'),
+    environment: 'testenv',
   };
 
   const addNewChannel = (payload) => {
@@ -49,14 +47,22 @@ const init = async () => {
   const sendNewMessage = (data) => {
     Socket.emit('newMessage', data);
   };
-  /*const sendNewChannel = (data) => {
-    Socket.emit('newChannel', data);
-  };*/
+  const sendNewChannel = (...args) =>
+    new Promise((resolve, reject) => {
+      Socket.emit(...args, (response) => {
+        resolve(response.data);
+      });
+    });
+
   const sendRemoveChannel = (data) => {
     Socket.emit('removeChannel', data);
   };
   const sendRenameChannel = (data) => {
     Socket.emit('renameChannel', data);
+  };
+
+  const api = {
+    sendChannel: (channel) => sendNewChannel('newChannel', channel),
   };
 
   Socket.on('newMessage', addNewMessage);
@@ -65,21 +71,25 @@ const init = async () => {
   Socket.on('renameChannel', changeChannelName);
 
   return (
-    <Provider store={store}>
-      <SocketContext.Provider
-        value={{
-          sendNewMessage,
-          sendNewChannel,
-          sendRemoveChannel,
-          sendRenameChannel,
-          api,
-        }}
-      >
-        <I18nextProvider i18n={i18n}>
-          <App />
-        </I18nextProvider>
-      </SocketContext.Provider>
-    </Provider>
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <SocketContext.Provider
+            value={{
+              sendNewMessage,
+              sendNewChannel,
+              sendRemoveChannel,
+              sendRenameChannel,
+              api,
+            }}
+          >
+            <I18nextProvider i18n={i18n}>
+              <App />
+            </I18nextProvider>
+          </SocketContext.Provider>
+        </Provider>
+      </ErrorBoundary>
+    </RollbarProvider>
   );
 };
 

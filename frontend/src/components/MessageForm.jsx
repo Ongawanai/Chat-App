@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import SocketContext from '../contexts/socketContext';
 import { useTranslation } from 'react-i18next';
+import filter from 'leo-profanity';
 
 export const MessageForm = () => {
   const [name, setName] = useState('');
@@ -19,7 +20,7 @@ export const MessageForm = () => {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    const message = e.target[0].value;
+    const message = filter.clean(e.target[0].value);
     sendNewMessage({ body: message, channelId: activeChannel, username });
     setName('');
   };

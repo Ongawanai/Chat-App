@@ -2,12 +2,13 @@ import { Modal } from 'react-bootstrap';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useContext, useEffect, useRef } from 'react';
-import { hideModal } from '../slices/modalsSlice';
-import { selectors as channelSelectors } from '../slices/channelsSlice.js';
+import { hideModal } from '../../slices/modalsSlice';
+import { selectors as channelSelectors } from '../../slices/channelsSlice.js';
 import * as Yup from 'yup';
-import SocketContext from '../contexts/socketContext';
+import SocketContext from '../../contexts/socketContext';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import filter from 'leo-profanity';
 
 export const RenameChannelModal = () => {
   const { t } = useTranslation();
@@ -40,8 +41,7 @@ export const RenameChannelModal = () => {
           initialValues={{ channel: '' }}
           validationSchema={channelSchema}
           onSubmit={(values) => {
-            console.log(values.channel);
-            sendRenameChannel({ id: channelId, name: values.channel });
+            sendRenameChannel({ id: channelId, name: filter.clean(values.channel) });
             onHide();
             toast.success(t('channelRenamed'));
           }}
