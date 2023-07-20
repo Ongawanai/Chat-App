@@ -2,9 +2,6 @@
 [![Actions Status](https://github.com/Ongawanai/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/Ongawanai/frontend-project-12/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/bb05f909725aeee7ba03/maintainability)](https://codeclimate.com/github/Ongawanai/frontend-project-12/maintainability)
 
-<h2>Link to deployed project</h2>
-https://frontend-project-11-2t4fk9zeq-ongawanai.vercel.app/
-
 <h3>Install</h3>
 make install
 
