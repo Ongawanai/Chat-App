@@ -1,15 +1,15 @@
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { Provider } from 'react-redux';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
+import { io } from 'socket.io-client';
+import filter from 'leo-profanity';
+import SocketContext from './contexts/socketContext.js';
 import App from './App';
 import resources from './locales/index.js';
-import { Provider } from 'react-redux';
 import store from './slices/index.js';
-import { io } from 'socket.io-client';
 import { addChannel, deleteChannel, renameChannel } from './slices/channelsSlice.js';
 import { addMessage } from './slices/messagesSlice.js';
-import SocketContext from './contexts/socketContext.js';
-import filter from 'leo-profanity';
-import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 
 const init = async () => {
   const Socket = io();
@@ -49,12 +49,17 @@ const init = async () => {
   const sendNewMessage = (data) => {
     Socket.emit('newMessage', data);
   };
-  const sendNewChannel = (...args) =>
+  const sendNewChannel = (...args) => (
     new Promise((resolve, reject) => {
-      Socket.emit(...args, (response) => {
-        resolve(response.data);
+      Socket.emit(...args, (response, err) => {
+        if (response.status === 'ok') {
+          resolve(response.data);
+        } else {
+          reject(err);
+        }
       });
-    });
+    })
+  );
 
   const sendRemoveChannel = (data) => {
     Socket.emit('removeChannel', data);

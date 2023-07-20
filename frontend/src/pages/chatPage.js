@@ -7,11 +7,11 @@ import AddChannelModal from '../components/modals/addChannel.js';
 import DeleteChannelModal from '../components/modals/deleteChannel';
 import { setActiveChannel, setChannels } from '../slices/channelsSlice.js';
 import { setMessages } from '../slices/messagesSlice.js';
-import { AddChannelButton } from '../components/AddChannelButton';
-import { Channels } from '../components/Channels';
-import { ChatHeader } from '../components/ChatHeader.jsx';
-import { MessageBox } from '../components/MessageBox.jsx';
-import { MessageForm } from '../components/MessageForm.jsx';
+import AddChannelButton from '../components/AddChannelButton';
+import Channels from '../components/Channels';
+import ChatHeader from '../components/ChatHeader.jsx';
+import MessageBox from '../components/MessageBox.jsx';
+import MessageForm from '../components/MessageForm.jsx';
 import AuthContext from '../contexts/authContext.js';
 import RenameChannelModal from '../components/modals/renameChannel.js';
 
