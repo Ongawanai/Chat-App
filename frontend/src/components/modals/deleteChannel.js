@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { hideModal } from '../../slices/modalsSlice.js';
 import SocketContext from '../../contexts/socketContext.js';
 
-export const DeleteChannelModal = () => {
+const DeleteChannelModal = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const onHide = () => dispatch(hideModal('deleteChannel'));
@@ -38,3 +38,5 @@ export const DeleteChannelModal = () => {
     </Modal>
   );
 };
+
+export default DeleteChannelModal;

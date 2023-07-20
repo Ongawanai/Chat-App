@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { AddChannelModal } from '../components/modals/addChannel.js';
-import { DeleteChannelModal } from '../components/modals/deleteChannel';
+import AddChannelModal from '../components/modals/addChannel.js';
+import DeleteChannelModal from '../components/modals/deleteChannel';
 import { setActiveChannel, setChannels } from '../slices/channelsSlice.js';
 import { setMessages } from '../slices/messagesSlice.js';
 import { AddChannelButton } from '../components/AddChannelButton';
@@ -13,9 +13,9 @@ import { ChatHeader } from '../components/ChatHeader.jsx';
 import { MessageBox } from '../components/MessageBox.jsx';
 import { MessageForm } from '../components/MessageForm.jsx';
 import AuthContext from '../contexts/authContext.js';
-import { RenameChannelModal } from '../components/modals/renameChannel.js';
+import RenameChannelModal from '../components/modals/renameChannel.js';
 
-export const BuildPage = () => {
+const BuildPage = () => {
   const dispatch = useDispatch();
   const { token } = useContext(AuthContext);
   const { t } = useTranslation();
@@ -32,7 +32,7 @@ export const BuildPage = () => {
         dispatch(setActiveChannel(response.data.currentChannelId));
         dispatch(setMessages(response.data.messages));
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error(t('dataError'));
       });
   }, []);
@@ -63,3 +63,5 @@ export const BuildPage = () => {
     </div>
   );
 };
+
+export default BuildPage;

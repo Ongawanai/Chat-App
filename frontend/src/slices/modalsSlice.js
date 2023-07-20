@@ -1,5 +1,5 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import messagesSlice from './messagesSlice';
 
 const initialState = {
   addChannel: null,

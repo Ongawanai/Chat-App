@@ -10,7 +10,7 @@ import SocketContext from '../../contexts/socketContext';
 import { selectors as channelSelectors } from '../../slices/channelsSlice.js';
 import { hideModal } from '../../slices/modalsSlice';
 
-export const RenameChannelModal = () => {
+const RenameChannelModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const onHide = () => dispatch(hideModal('renameChannel'));
@@ -78,3 +78,5 @@ export const RenameChannelModal = () => {
     </Modal>
   );
 };
+
+export default RenameChannelModal;

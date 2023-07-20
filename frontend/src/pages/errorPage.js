@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-export const Build404 = () => {
+const Build404 = () => {
   const { t } = useTranslation();
   return (
     <div id="error-page">
@@ -12,3 +12,5 @@ export const Build404 = () => {
     </div>
   );
 };
+
+export default Build404;

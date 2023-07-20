@@ -6,9 +6,9 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../hooks/index.js';
+import useAuth from '../hooks/index.js';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const { t } = useTranslation();
   const auth = useAuth();
   const navigate = useNavigate();
@@ -84,3 +84,5 @@ export const LoginPage = () => {
     </div>
   );
 };
+
+export default LoginPage;

@@ -10,7 +10,7 @@ import { hideModal } from '../../slices/modalsSlice.js';
 import { selectors as channelSelectors, setActiveChannel } from '../../slices/channelsSlice.js';
 import SocketContext from '../../contexts/socketContext.js';
 
-export const AddChannelModal = () => {
+const AddChannelModal = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const onHide = () => dispatch(hideModal('addChannel'));
@@ -40,7 +40,6 @@ export const AddChannelModal = () => {
           onSubmit={async (values) => {
             try {
               const response = await api.sendChannel({ name: filter.clean(values.channel) });
-              console.log(response);
               dispatch(setActiveChannel(response.id));
               onHide();
               toast.success(t('channelCreated'));
@@ -80,3 +79,5 @@ export const AddChannelModal = () => {
     </Modal>
   );
 };
+
+export default AddChannelModal;

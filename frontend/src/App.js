@@ -1,17 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { LoginPage } from './pages/loginPage';
-import { BuildPage } from './pages/chatPage';
-import { Build404 } from './pages/errorPage';
+import LoginPage from './pages/loginPage';
+import BuildPage from './pages/chatPage';
+import Build404 from './pages/errorPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AuthContext from './contexts/authContext';
-import { RegistrationPage } from './pages/registrationPage';
-import { LogOutButton } from './components/logOutButton';
+import RegistrationPage from './pages/registrationPage';
+import LogOutButton from './components/logOutButton';
 import 'react-toastify/dist/ReactToastify.css';
-
-export const useAuth = () => useContext(AuthContext);
+import AuthContext from './contexts/authContext';
+import useAuth from './hooks';
 
 const AuthProvider = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -39,10 +38,18 @@ const AuthProvider = ({ children }) => {
 
 const LoginRoute = ({ children }) => {
   const auth = useAuth();
-
   return auth.loggedIn ? children : <LoginPage />;
 };
 
+const RegistrationRoute = ({ children }) => {
+  const auth = useAuth();
+  return auth.loggedIn ? children : <RegistrationPage />;
+};
+
+const ShowButton = () => {
+  const auth = useAuth();
+  return auth.loggedIn ? <LogOutButton /> : null;
+};
 const App = () => (
   <AuthProvider>
     <BrowserRouter>
@@ -52,7 +59,7 @@ const App = () => (
             <a className="navbar-brand" href="/">
               Hexlet Chat
             </a>
-            <LogOutButton />
+            <ShowButton />
           </div>
         </nav>
         <Routes>
@@ -73,7 +80,14 @@ const App = () => (
               </LoginRoute>
             )}
           />
-          <Route path="signup" element={<RegistrationPage />} />
+          <Route
+            path="signup"
+            element={(
+              <RegistrationRoute>
+                <BuildPage />
+              </RegistrationRoute>
+            )}
+          />
         </Routes>
         <ToastContainer />
       </div>
