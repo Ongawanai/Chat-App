@@ -16,7 +16,7 @@ const AddChannelModal = () => {
   const onHide = () => dispatch(hideModal('addChannel'));
   const channels = useSelector(channelSelectors.selectAll);
   const nameField = useRef(null);
-  const { api } = useContext(SocketContext);
+  const { sendChannel } = useContext(SocketContext);
   useEffect(() => {
     nameField.current.focus();
   }, []);
@@ -39,7 +39,7 @@ const AddChannelModal = () => {
           validationSchema={channelSchema}
           onSubmit={async (values) => {
             try {
-              const response = await api.sendChannel({ name: filter.clean(values.channel) });
+              const response = await sendChannel({ name: filter.clean(values.channel) });
               dispatch(setActiveChannel(response.id));
               onHide();
               toast.success(t('channelCreated'));

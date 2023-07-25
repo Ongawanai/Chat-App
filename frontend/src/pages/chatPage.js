@@ -14,6 +14,7 @@ import MessageBox from '../components/MessageBox.jsx';
 import MessageForm from '../components/MessageForm.jsx';
 import AuthContext from '../contexts/authContext.js';
 import RenameChannelModal from '../components/modals/renameChannel.js';
+import routes from '../routes.js';
 
 const BuildPage = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const BuildPage = () => {
 
   useEffect(() => {
     axios
-      .get('/api/v1/data', {
+      .get(routes.dataPath(), {
         headers: {
           Authorization: `Bearer ${token}`,
         },

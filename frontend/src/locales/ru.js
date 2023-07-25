@@ -42,5 +42,6 @@ export default {
     dataError: 'Ошибка соединения',
     confirmRegistration: 'Зарегистрироваться',
     channelManagment: 'Управление каналом',
+    headerText: 'Hexlet Chat',
   },
 };

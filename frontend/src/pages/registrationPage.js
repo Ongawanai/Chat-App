@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/index.js';
+import routes from '../routes.js';
 
 const RegistrationPage = () => {
   const { t } = useTranslation();
@@ -33,7 +34,7 @@ const RegistrationPage = () => {
                 onSubmit={async (values) => {
                   try {
                     const { username, password } = values;
-                    const response = await axios.post('/api/v1/signup', { username, password });
+                    const response = await axios.post(routes.regPath(), { username, password });
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('username', response.data.username);
                     auth.logIn();

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import LoginPage from './pages/loginPage';
 import BuildPage from './pages/chatPage';
 import Build404 from './pages/errorPage';
@@ -11,6 +12,7 @@ import LogOutButton from './components/logOutButton';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from './contexts/authContext';
 import useAuth from './hooks';
+import routes from './routes.js';
 
 const AuthProvider = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -50,49 +52,52 @@ const ShowButton = () => {
   const auth = useAuth();
   return auth.loggedIn ? <LogOutButton /> : null;
 };
-const App = () => (
-  <AuthProvider>
-    <BrowserRouter>
-      <div className="d-flex flex-column h-100">
-        <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-          <div className="container">
-            <a className="navbar-brand" href="/">
-              Hexlet Chat
-            </a>
-            <ShowButton />
-          </div>
-        </nav>
-        <Routes>
-          <Route path="*" element={<Build404 />} />
-          <Route
-            path="/"
-            element={(
-              <LoginRoute>
-                <BuildPage />
-              </LoginRoute>
-            )}
-          />
-          <Route
-            path="login"
-            element={(
-              <LoginRoute>
-                <BuildPage />
-              </LoginRoute>
-            )}
-          />
-          <Route
-            path="signup"
-            element={(
-              <RegistrationRoute>
-                <BuildPage />
-              </RegistrationRoute>
-            )}
-          />
-        </Routes>
-        <ToastContainer />
-      </div>
-    </BrowserRouter>
-  </AuthProvider>
-);
+const App = () => {
+  const { t } = useTranslation();
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="d-flex flex-column h-100">
+          <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+            <div className="container">
+              <a className="navbar-brand" href="/">
+                {t('headerText')}
+              </a>
+              <ShowButton />
+            </div>
+          </nav>
+          <Routes>
+            <Route path="*" element={<Build404 />} />
+            <Route
+              path={routes.chatPagePath()}
+              element={(
+                <LoginRoute>
+                  <BuildPage />
+                </LoginRoute>
+              )}
+            />
+            <Route
+              path={routes.loginPagePath()}
+              element={(
+                <LoginRoute>
+                  <BuildPage />
+                </LoginRoute>
+              )}
+            />
+            <Route
+              path={routes.registrationPagePath()}
+              element={(
+                <RegistrationRoute>
+                  <BuildPage />
+                </RegistrationRoute>
+              )}
+            />
+          </Routes>
+          <ToastContainer />
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+};
 
 export default App;

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/index.js';
+import routes from '../routes.js';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ const LoginPage = () => {
                 validationSchema={SignupSchema}
                 onSubmit={async (values) => {
                   try {
-                    const response = await axios.post('/api/v1/login', values);
+                    const response = await axios.post(routes.loginPath(), values);
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('username', response.data.username);
                     auth.logIn();

@@ -25,7 +25,7 @@ const init = async () => {
   filter.add(filter.getDictionary('ru'));
 
   const rollbarConfig = {
-    accessToken: '6a4f0b93d51648eda09e8d6633db082f',
+    accessToken: process.env.ROLLBAR_TOKEN,
     environment: 'testenv',
   };
 
@@ -68,9 +68,7 @@ const init = async () => {
     Socket.emit('renameChannel', data);
   };
 
-  const api = {
-    sendChannel: (channel) => sendNewChannel('newChannel', channel),
-  };
+  const sendChannel = (channel) => sendNewChannel('newChannel', channel);
 
   Socket.on('newMessage', addNewMessage);
   Socket.on('newChannel', addNewChannel);
@@ -87,7 +85,7 @@ const init = async () => {
               sendNewChannel,
               sendRemoveChannel,
               sendRenameChannel,
-              api,
+              sendChannel,
             }}
           >
             <I18nextProvider i18n={i18n}>
