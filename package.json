@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Slack-like chat app",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "npm run build --prefix frontend",
     "start": "start-server -s ./frontend/build",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/Ongawanai/frontend-project-12.git"
   },
-  "author": "",
+  "author": "Anton Kuzmin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Ongawanai/frontend-project-12/issues"
