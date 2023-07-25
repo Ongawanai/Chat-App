@@ -19,10 +19,6 @@
   },
   "homepage": "https://github.com/Ongawanai/frontend-project-12#readme",
   "dependencies": {
-    "@hexlet/chat-server": "^1.1.6",
-    "@reduxjs/toolkit": "^1.9.5",
-    "axios": "^1.4.0",
-    "bootstrap": "^5.3.0",
-    "formik": "^2.4.2"
+    "@hexlet/chat-server": "^1.1.6"
   }
 }
