@@ -8,11 +8,12 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 import SocketContext from '../contexts/socketContext';
+import getChannels from '../selectors/channelsSelector.js';
 
 const MessageForm = () => {
   const [name, setName] = useState('');
   const { t } = useTranslation();
-  const activeChannel = useSelector((state) => state.channels.activeChannel);
+  const { activeChannel } = useSelector(getChannels);
   const messageInput = useRef(null);
   useEffect(() => {
     messageInput.current.focus();

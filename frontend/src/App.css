@@ -8,6 +8,11 @@
     background-color: var(--bs-danger);
     border-radius: var(--bs-border-radius);
 }
+
 .non-clickable {
     pointer-events: none;
+}
+
+.on-top {
+    transform: translate3d(0px, 40px, 0px) !important;
 }

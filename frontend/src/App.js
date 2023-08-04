@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import LoginPage from './pages/loginPage';
-import BuildPage from './pages/chatPage';
+import ChatPage from './pages/chatPage';
 import Build404 from './pages/errorPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -72,7 +72,7 @@ const App = () => {
               path={routes.chatPagePath()}
               element={(
                 <LoginRoute>
-                  <BuildPage />
+                  <ChatPage />
                 </LoginRoute>
               )}
             />
@@ -80,7 +80,7 @@ const App = () => {
               path={routes.loginPagePath()}
               element={(
                 <LoginRoute>
-                  <BuildPage />
+                  <ChatPage />
                 </LoginRoute>
               )}
             />
@@ -88,7 +88,7 @@ const App = () => {
               path={routes.registrationPagePath()}
               element={(
                 <RegistrationRoute>
-                  <BuildPage />
+                  <ChatPage />
                 </RegistrationRoute>
               )}
             />

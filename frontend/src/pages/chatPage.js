@@ -15,8 +15,9 @@ import MessageForm from '../components/MessageForm.jsx';
 import AuthContext from '../contexts/authContext.js';
 import RenameChannelModal from '../components/modals/renameChannel.js';
 import routes from '../routes.js';
+import getModals from '../selectors/modalsSelector.js';
 
-const BuildPage = () => {
+const ChatPage = () => {
   const dispatch = useDispatch();
   const { token } = useContext(AuthContext);
   const { t } = useTranslation();
@@ -38,7 +39,7 @@ const BuildPage = () => {
       });
   }, []);
 
-  const modals = useSelector((state) => state.modals);
+  const modals = useSelector(getModals);
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
@@ -65,4 +66,4 @@ const BuildPage = () => {
   );
 };
 
-export default BuildPage;
+export default ChatPage;

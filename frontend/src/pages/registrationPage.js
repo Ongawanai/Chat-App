@@ -39,7 +39,7 @@ const RegistrationPage = () => {
                     localStorage.setItem('username', response.data.username);
                     auth.logIn();
                     setErrorMessage('');
-                    navigate('/');
+                    navigate(routes.chatPagePath());
                   } catch (error) {
                     if (error.response.status === 409) {
                       setErrorMessage(t('userExist'));

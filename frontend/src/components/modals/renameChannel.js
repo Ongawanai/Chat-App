@@ -9,6 +9,7 @@ import filter from 'leo-profanity';
 import SocketContext from '../../contexts/socketContext';
 import { selectors as channelSelectors } from '../../slices/channelsSlice.js';
 import { hideModal } from '../../slices/modalsSlice';
+import getModals from '../../selectors/modalsSelector.js';
 
 const RenameChannelModal = () => {
   const { t } = useTranslation();
@@ -23,12 +24,12 @@ const RenameChannelModal = () => {
     nameField.current.focus();
   }, []);
 
-  const channelId = useSelector((state) => state.modals.renameChannel);
+  const channelId = useSelector(getModals).renameChannel;
   const { sendRenameChannel } = useContext(SocketContext);
   const currentChannel = channels.find((channel) => channel.id === channelId);
 
   const channelSchema = Yup.object().shape({
-    channel: Yup.string().required('Обязательное поле').notOneOf(channelsNames, 'Такой канал уже существует'),
+    channel: Yup.string().required('Обязательное поле').min(3, t('min3')).notOneOf(channelsNames, 'Такой канал уже существует'),
   });
 
   return (

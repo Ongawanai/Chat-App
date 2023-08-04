@@ -9,6 +9,7 @@ export default {
     channels: 'Каналы',
     registration: 'Регистрация',
     min6: 'Не менее 6 символов',
+    min3: 'Не менее 3 символов',
     min3max20: 'От 3 до 20 символов',
     req: 'Обязательное поле',
     messages_zero: 'сообщений',

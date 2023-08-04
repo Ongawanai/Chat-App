@@ -5,13 +5,14 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { deleteChannelModal, renameChannelModal } from '../slices/modalsSlice.js';
 import { selectors as channelSelectors, setActiveChannel } from '../slices/channelsSlice.js';
+import getChannels from '../selectors/channelsSelector.js';
 
 const Channels = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const channels = useSelector(channelSelectors.selectAll);
 
-  const activeChannelId = useSelector((state) => state.channels.activeChannel);
+  const activeChannelId = useSelector(getChannels).activeChannel;
 
   const channelClass = (channelId) => cn('w-100', 'text-start', 'btn', 'text-truncate', {
     'btn-secondary': activeChannelId === channelId,
@@ -41,13 +42,13 @@ const Channels = () => {
                 {currChanel.name}
               </button>
               <Dropdown.Toggle
-                className={`btn ${currChanel.id === activeChannelId ? ' btn-secondary' : ''}`}
+                className={`btn${currChanel.id === activeChannelId ? ' btn-secondary' : ''}`}
                 variant="none"
                 id="dropdown-split-basic"
               >
                 <span className="visually-hidden">{t('channelManagment')}</span>
               </Dropdown.Toggle>
-              <Dropdown.Menu>
+              <Dropdown.Menu className="on-top">
                 <Dropdown.Item onClick={deleteClick(currChanel.id)}>{t('delete')}</Dropdown.Item>
                 <Dropdown.Item onClick={renameClick(currChanel.id)}>{t('renameButton')}</Dropdown.Item>
               </Dropdown.Menu>
@@ -74,7 +75,7 @@ const Channels = () => {
   const preparedChannels = renderChannels();
 
   return (
-    <ul id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
+    <ul id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 h-100 d-block">
       {preparedChannels}
     </ul>
   );

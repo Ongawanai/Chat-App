@@ -24,7 +24,7 @@ const AddChannelModal = () => {
   const channelsNames = channels.map(({ name }) => name);
 
   const channelSchema = Yup.object().shape({
-    channel: Yup.string().required(t('req')).notOneOf(channelsNames, t('channelExist')),
+    channel: Yup.string().required(t('req')).min(3, t('min3')).notOneOf(channelsNames, t('channelExist')),
   });
 
   return (

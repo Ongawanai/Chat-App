@@ -5,12 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { hideModal } from '../../slices/modalsSlice.js';
 import SocketContext from '../../contexts/socketContext.js';
+import getModals from '../../selectors/modalsSelector.js';
 
 const DeleteChannelModal = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const onHide = () => dispatch(hideModal('deleteChannel'));
-  const channelId = useSelector((state) => state.modals.deleteChannel);
+  const channelId = useSelector(getModals).deleteChannel;
 
   const { sendRemoveChannel } = useContext(SocketContext);
 

@@ -2,9 +2,10 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { selectors as messageSelectors } from '../slices/messagesSlice.js';
 import { selectors as channelSelectors } from '../slices/channelsSlice.js';
+import getChannels from '../selectors/channelsSelector.js';
 
 const ChatHeader = () => {
-  const activeChannelId = useSelector((state) => state.channels.activeChannel);
+  const activeChannelId = useSelector(getChannels).activeChannel;
   const messages = useSelector(messageSelectors.selectAll);
   const channels = useSelector(channelSelectors.selectAll);
   const { t } = useTranslation();
