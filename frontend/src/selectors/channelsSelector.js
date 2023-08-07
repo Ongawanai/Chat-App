@@ -6,10 +6,10 @@ export const getChannels = (state) => state.channels;
 
 export const getActiveChannel = (state) => state.channels.activeChannel;
 
-const allChannels = () => useSelector(channelSelector.selectAll);
+const AllChannels = () => useSelector(channelSelector.selectAll);
 
 export const getActiveChannelInfo = createSelector(
-  allChannels,
+  AllChannels,
   (state) => state.channels.activeChannel,
   (channels, activeChannel) => channels.find((channel) => channel.id === activeChannel),
 );
