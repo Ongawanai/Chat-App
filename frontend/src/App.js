@@ -50,7 +50,7 @@ const RegistrationRoute = ({ children }) => {
 
 const ShowButton = () => {
   const auth = useAuth();
-  return auth.loggedIn ? <LogOutButton /> : null;
+  return auth.loggedIn && <LogOutButton />;
 };
 const App = () => {
   const { t } = useTranslation();

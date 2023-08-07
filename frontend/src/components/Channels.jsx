@@ -5,14 +5,14 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { deleteChannelModal, renameChannelModal } from '../slices/modalsSlice.js';
 import { selectors as channelSelectors, setActiveChannel } from '../slices/channelsSlice.js';
-import getChannels from '../selectors/channelsSelector.js';
+import { getActiveChannel } from '../selectors/channelsSelector.js';
 
 const Channels = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const channels = useSelector(channelSelectors.selectAll);
 
-  const activeChannelId = useSelector(getChannels).activeChannel;
+  const activeChannelId = useSelector(getActiveChannel);
 
   const channelClass = (channelId) => cn('w-100', 'text-start', 'btn', 'text-truncate', {
     'btn-secondary': activeChannelId === channelId,

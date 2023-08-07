@@ -59,9 +59,9 @@ const ChatPage = () => {
           </div>
         </div>
       </div>
-      {modals.addChannel ? <AddChannelModal /> : null}
-      {modals.deleteChannel ? <DeleteChannelModal /> : null}
-      {modals.renameChannel ? <RenameChannelModal /> : null}
+      {modals.addChannel && <AddChannelModal />}
+      {modals.deleteChannel && <DeleteChannelModal />}
+      {modals.renameChannel && <RenameChannelModal />}
     </div>
   );
 };
