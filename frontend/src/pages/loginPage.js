@@ -36,11 +36,9 @@ const LoginPage = () => {
                 onSubmit={async (values) => {
                   try {
                     const response = await axios.post(routes.loginPath(), values);
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('username', response.data.username);
-                    auth.logIn();
+                    auth.logIn(response.data.token, response.data.username);
                     setErrorMessage('');
-                    navigate('/');
+                    navigate(routes.chatPagePath());
                   } catch (error) {
                     setErrorMessage(t('wrongNameOrPass'));
                   }

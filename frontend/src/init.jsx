@@ -12,7 +12,7 @@ import { addChannel, deleteChannel, renameChannel } from './slices/channelsSlice
 import { addMessage } from './slices/messagesSlice.js';
 
 const init = async () => {
-  const Socket = io();
+  const Socket = io('http://localhost:3000/');
   const i18n = i18next.createInstance();
 
   await i18n.use(initReactI18next).init({
@@ -46,10 +46,7 @@ const init = async () => {
     store.dispatch(renameChannel({ id, changes: { name, removable } }));
   };
 
-  const sendNewMessage = (data) => {
-    Socket.emit('newMessage', data);
-  };
-  const sendNewChannel = (...args) => (
+  const promisify = (...args) => (
     new Promise((resolve, reject) => {
       Socket.emit(...args, (response, err) => {
         if (response.status === 'ok') {
@@ -61,14 +58,10 @@ const init = async () => {
     })
   );
 
-  const sendRemoveChannel = (data) => {
-    Socket.emit('removeChannel', data);
-  };
-  const sendRenameChannel = (data) => {
-    Socket.emit('renameChannel', data);
-  };
-
-  const sendChannel = (channel) => sendNewChannel('newChannel', channel);
+  const sendRemoveChannel = (channel) => promisify('removeChannel', channel);
+  const sendRenameChannel = (channel) => promisify('renameChannel', channel);
+  const sendChannel = (channel) => promisify('newChannel', channel);
+  const sendNewMessage = (message) => promisify('newMessage', message);
 
   Socket.on('newMessage', addNewMessage);
   Socket.on('newChannel', addNewChannel);
@@ -82,7 +75,6 @@ const init = async () => {
           <SocketContext.Provider
             value={{
               sendNewMessage,
-              sendNewChannel,
               sendRemoveChannel,
               sendRenameChannel,
               sendChannel,

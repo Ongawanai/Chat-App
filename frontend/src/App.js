@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import LoginPage from './pages/loginPage';
@@ -18,10 +22,15 @@ const AuthProvider = ({ children }) => {
   const token = localStorage.getItem('token');
 
   const [loggedIn, setLoggedIn] = useState(!!token);
-  const logIn = () => setLoggedIn(true);
+  const logIn = (newToken, username) => {
+    localStorage.setItem('token', newToken);
+    localStorage.setItem('username', username);
+    setLoggedIn(true);
+  };
   const logOut = () => {
     localStorage.removeItem('token');
     setLoggedIn(false);
+    window.location.reload();
   };
 
   return (

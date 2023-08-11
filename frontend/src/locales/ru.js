@@ -44,5 +44,6 @@ export default {
     confirmRegistration: 'Зарегистрироваться',
     channelManagment: 'Управление каналом',
     headerText: 'Hexlet Chat',
+    oldToken: 'Токен устарел, авторизуйтесь заново',
   },
 };

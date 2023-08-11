@@ -35,9 +35,7 @@ const RegistrationPage = () => {
                   try {
                     const { username, password } = values;
                     const response = await axios.post(routes.regPath(), { username, password });
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('username', response.data.username);
-                    auth.logIn();
+                    auth.logIn(response.data.token, response.data.username);
                     setErrorMessage('');
                     navigate(routes.chatPagePath());
                   } catch (error) {

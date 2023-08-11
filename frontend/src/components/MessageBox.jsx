@@ -5,15 +5,14 @@ import { getActiveChannel } from '../selectors/channelsSelector.js';
 import { getActiveMessages } from '../selectors/messagesSelector.js';
 
 const MessageBox = () => {
-  const messages = useSelector(messageSelectors.selectAll);
   const activeChannel = useSelector(getActiveChannel);
-  const messageArea = useRef(null);
+  const activeChannelMessages = useSelector(getActiveMessages);
+  const messages = useSelector(messageSelectors.selectAll);
 
+  const messageArea = useRef(null);
   useEffect(() => {
     messageArea.current.scrollTo(0, messageArea.current.scrollHeight);
   }, [activeChannel, messages]);
-
-  const activeChannelMessages = useSelector(getActiveMessages);
 
   return (
     <div id="messages-box" ref={messageArea} className="chat-messages overflow-auto px-5">

@@ -16,10 +16,12 @@ import AuthContext from '../contexts/authContext.js';
 import RenameChannelModal from '../components/modals/renameChannel.js';
 import routes from '../routes.js';
 import getModals from '../selectors/modalsSelector.js';
+import useAuth from '../hooks/index.js';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
   const { token } = useContext(AuthContext);
+  const auth = useAuth();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -34,8 +36,13 @@ const ChatPage = () => {
         dispatch(setActiveChannel(response.data.currentChannelId));
         dispatch(setMessages(response.data.messages));
       })
-      .catch(() => {
-        toast.error(t('dataError'));
+      .catch((error) => {
+        if (error.response.status === 401) {
+          toast.error(t('oldToken'));
+          auth.logOut();
+        } else {
+          toast.error(t('dataError'));
+        }
       });
   }, []);
 

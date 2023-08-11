@@ -29,7 +29,7 @@ const RenameChannelModal = () => {
   const currentChannel = channels.find((channel) => channel.id === channelId);
 
   const channelSchema = Yup.object().shape({
-    channel: Yup.string().required('Обязательное поле').min(3, t('min3')).notOneOf(channelsNames, 'Такой канал уже существует'),
+    channel: Yup.string().required(t('req')).min(3, t('min3')).notOneOf(channelsNames, t('channelExist')),
   });
 
   return (
