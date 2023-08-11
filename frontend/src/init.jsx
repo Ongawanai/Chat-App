@@ -12,7 +12,7 @@ import { addChannel, deleteChannel, renameChannel } from './slices/channelsSlice
 import { addMessage } from './slices/messagesSlice.js';
 
 const init = async () => {
-  const Socket = io('http://localhost:3000/');
+  const Socket = io();
   const i18n = i18next.createInstance();
 
   await i18n.use(initReactI18next).init({
