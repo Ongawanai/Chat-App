@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { deleteChannelModal, renameChannelModal } from '../slices/modalsSlice.js';
+import { showModal } from '../slices/modalsSlice.js';
 import { selectors as channelSelectors, setActiveChannel } from '../slices/channelsSlice.js';
 import { getActiveChannel } from '../selectors/channelsSelector.js';
 
@@ -19,11 +19,11 @@ const Channels = () => {
   });
 
   const deleteClick = (id) => () => {
-    dispatch(deleteChannelModal(id));
+    dispatch(showModal(['deleteChannel', id]));
   };
 
   const renameClick = (id) => () => {
-    dispatch(renameChannelModal(id));
+    dispatch(showModal(['renameChannel', id]));
   };
 
   const renderChannels = () => {
