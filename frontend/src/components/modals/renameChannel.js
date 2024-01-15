@@ -60,9 +60,7 @@ const RenameChannelModal = () => {
                   innerRef={nameField}
                 />
                 {errors.channel ? <div className="message-error">{errors.channel}</div> : null}
-                <label className="visually-hidden" htmlFor="channel">
-                  {t('channelName')}
-                </label>
+                <label htmlFor="channel">{t('channelName')}</label>
               </div>
               <div className="d-flex justify-content-end">
                 <button type="button" className="me-2 btn btn-secondary" onClick={onHide}>

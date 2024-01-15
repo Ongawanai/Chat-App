@@ -52,7 +52,7 @@ const AddChannelModal = () => {
             <Form>
               <div className="form-floating mb-3">
                 <Field
-                  className="mb-2 form-control"
+                  className="mb-2 input-sm form-control"
                   id="channel"
                   type="channel"
                   name="channel"
@@ -60,9 +60,7 @@ const AddChannelModal = () => {
                   innerRef={nameField}
                 />
                 {errors.channel ? <div className="message-error">{errors.channel}</div> : null}
-                <label className="visually-hidden" htmlFor="channel">
-                  {t('channelName')}
-                </label>
+                <label htmlFor="channel">{t('channelName')}</label>
               </div>
               <div className="d-flex justify-content-end">
                 <button type="button" className="me-2 btn btn-secondary" onClick={onHide}>
